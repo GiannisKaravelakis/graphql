@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zone01 Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <!-- ========== LOGIN VIEW ========== -->
+  <main id="login-view" class="login-view" hidden>
+    <form id="login-form" class="login-card" novalidate>
+      <h1 class="login-title">Zone01 Profile</h1>
+      <p class="login-subtitle">Sign in with your platform account</p>
+
+      <label for="identifier">Username or email</label>
+      <input id="identifier" name="identifier" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+
+      <label for="password">Password</label>
+      <div class="password-field">
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <button type="button" id="toggle-password" class="ghost-btn" aria-label="Show password" aria-pressed="false">Show</button>
+      </div>
+
+      <p id="login-error" class="form-error" role="alert" aria-live="assertive"></p>
+
+      <button id="login-submit" type="submit" class="primary-btn">Sign in</button>
+    </form>
+  </main>
+
+  <!-- ========== PROFILE VIEW ========== -->
+  <div id="profile-view" hidden>
+    <header class="topbar">
+      <div class="brand">Zone01 <span>Profile</span></div>
+      <div class="topbar-right">
+        <span id="topbar-login" class="topbar-login"></span>
+        <button id="logout-btn" class="ghost-btn">Log out</button>
+      </div>
+    </header>
+
+    <p id="profile-error" class="banner-error" role="alert" hidden></p>
+    <div id="loading" class="loading" aria-live="polite">Loading your data…</div>
+
+    <main id="profile-content" class="profile" hidden>
+      <!-- Info sections -->
+      <section class="grid">
+        <article class="card" id="identity-card" aria-labelledby="identity-h">
+          <h2 id="identity-h">Identity</h2>
+          <div class="identity">
+            <div id="avatar" class="avatar" aria-hidden="true"></div>
+            <div>
+              <p id="full-name" class="big-name"></p>
+              <p id="login-name" class="muted"></p>
+            </div>
+          </div>
+          <dl class="kv" id="identity-list"></dl>
+        </article>
+
+        <article class="card" aria-labelledby="xp-h">
+          <h2 id="xp-h">XP &amp; Level</h2>
+          <div class="stat-row">
+            <div class="stat">
+              <span class="stat-label">Level</span>
+              <span id="level-value" class="stat-value accent"></span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Total XP</span>
+              <span id="xp-value" class="stat-value"></span>
+            </div>
+          </div>
+          <p id="xp-note" class="muted small"></p>
+        </article>
+
+        <article class="card" aria-labelledby="audit-h">
+          <h2 id="audit-h">Audit ratio</h2>
+          <div id="audit-ratio" class="audit"></div>
+        </article>
+
+        <article class="card" aria-labelledby="projects-h">
+          <h2 id="projects-h">Projects</h2>
+          <h3 class="subhead">In progress</h3>
+          <ul id="current-projects" class="project-list"></ul>
+          <h3 class="subhead">Recently finished</h3>
+          <ul id="recent-projects" class="project-list"></ul>
+        </article>
+
+        <article class="card card-wide" aria-labelledby="skills-h">
+          <h2 id="skills-h">Skills</h2>
+          <div class="skills-wrap">
+            <div id="skills-radar" class="chart"></div>
+            <ul id="skills-list" class="skills-list"></ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- Statistics -->
+      <section class="stats" aria-labelledby="stats-h">
+        <h2 id="stats-h" class="section-title">Statistics</h2>
+
+        <article class="card card-full" aria-labelledby="g1-h">
+          <div class="card-head">
+            <h3 id="g1-h">XP progression over time</h3>
+            <button id="replay-xp" class="ghost-btn small-btn" aria-label="Replay animation">Replay ↻</button>
+          </div>
+          <div id="xp-time-chart" class="chart"></div>
+        </article>
+
+        <article class="card card-full" aria-labelledby="g2-h">
+          <div class="card-head">
+            <h3 id="g2-h">XP by project</h3>
+            <div class="seg" role="group" aria-label="Sort projects">
+              <button class="seg-btn active" data-sort="xp" aria-pressed="true">Most XP</button>
+              <button class="seg-btn" data-sort="date" aria-pressed="false">Most recent</button>
+              <button class="seg-btn" data-sort="name" aria-pressed="false">A–Z</button>
+            </div>
+          </div>
+          <div id="xp-project-chart" class="chart"></div>
+        </article>
+
+        <article class="card" aria-labelledby="g3-h">
+          <h3 id="g3-h">Project results: PASS / FAIL</h3>
+          <div id="passfail-chart" class="chart"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+</body>
+</html>
