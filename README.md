@@ -2,6 +2,10 @@
 
 A profile page that signs in to the Zone01 platform and shows your school data, queried from its GraphQL API. Vanilla HTML/CSS/JS, hand-built SVG charts, no build step.
 
+**Live site:** https://gianniskaravelakis.github.io/graphql/
+
+Open the link and sign in with your Zone01 credentials. You don't need to install anything.
+
 ## Features
 
 - **Login** with `username:password` or `email:password` (Basic auth, UTF-8 safe base64) and a specific error message for each failure case
@@ -29,7 +33,7 @@ All queries are in [`js/queries.js`](js/queries.js):
 ```
 index.html
 css/style.css
-js/config.js    endpoints + XP path filters
+js/config.js    endpoints + module event id
 js/auth.js      sign-in, JWT decode, session
 js/api.js       GraphQL fetch with Bearer token
 js/queries.js   GraphQL queries
@@ -38,17 +42,21 @@ js/charts.js    SVG charts
 js/app.js       UI wiring
 ```
 
-## Run locally
+## Hosting
 
-ES modules need an HTTP server (opening `index.html` as a file won't work):
+The site is hosted on GitHub Pages from the `main` branch of [GiannisKaravelakis/graphql](https://github.com/GiannisKaravelakis/graphql), at the repository root (`/`). Every push to `main` on the `github` remote redeploys the site within a minute or two:
+
+```bash
+git push github main
+```
+
+Because it is a static site with no build step, GitHub Pages serves the files as they are. The browser calls the Zone01 API (`platform.zone01.gr`) directly.
+
+## Run locally (optional)
+
+Only needed for development. ES modules need an HTTP server (opening `index.html` as a file won't work):
 
 ```bash
 python3 -m http.server 8000
 # open http://localhost:8000
 ```
-
-## Deploy to GitHub Pages
-
-1. Push this folder to a GitHub repository (files at the repo root).
-2. Go to **Settings → Pages → Build and deployment** and set **Source** to "Deploy from a branch", **Branch** to `main` and `/ (root)`.
-3. The site is published at `https://<username>.github.io/<repo>/`.
