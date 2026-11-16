@@ -1,4 +1,4 @@
-import { MAIN_PATH_LIKE, EXCLUDED_PATH_LIKE } from "./config.js";
+import { MODULE_EVENT_ID } from "./config.js";
 import { AuthError, signIn, getToken, getUserId, clearSession } from "./auth.js";
 import { gql } from "./api.js";
 import { USER_QUERY, XP_QUERY, PROGRESS_QUERY } from "./queries.js";
@@ -117,7 +117,7 @@ async function loadProfile() {
 
   try {
     const userId = getUserId(token); // as the subject suggests, read the id from the JWT
-    const vars = { userId, include: MAIN_PATH_LIKE, exclude: EXCLUDED_PATH_LIKE };
+    const vars = { userId, eventId: MODULE_EVENT_ID };
 
     const [userData, xpData, progressData] = await Promise.all([
       gql(USER_QUERY),

@@ -21,12 +21,12 @@ export const USER_QUERY = `
 // Query WITH ARGUMENTS (where / order_by / limit + variables) and NESTED (object { … }).
 // $userId comes from the decoded JWT.
 export const XP_QUERY = `
-  query Xp($userId: Int!, $include: String!, $exclude: String!) {
+  query Xp($userId: Int!, $eventId: Int!) {
     xp: transaction(
       where: {
         userId: { _eq: $userId }
         type: { _eq: "xp" }
-        path: { _like: $include, _nlike: $exclude }
+        eventId: { _eq: $eventId }
       }
       order_by: { createdAt: asc }
     ) {
@@ -43,7 +43,7 @@ export const XP_QUERY = `
       where: {
         userId: { _eq: $userId }
         type: { _eq: "level" }
-        path: { _like: $include, _nlike: $exclude }
+        eventId: { _eq: $eventId }
       }
       order_by: { amount: desc }
       limit: 1
@@ -63,12 +63,12 @@ export const XP_QUERY = `
 
 // NESTED query with ARGUMENTS: filters progress through the related object's type.
 export const PROGRESS_QUERY = `
-  query Progress($userId: Int!, $include: String!, $exclude: String!) {
+  query Progress($userId: Int!, $eventId: Int!) {
     progress(
       where: {
         userId: { _eq: $userId }
         object: { type: { _eq: "project" } }
-        path: { _like: $include, _nlike: $exclude }
+        eventId: { _eq: $eventId }
       }
       order_by: { updatedAt: desc }
     ) {
